@@ -48,6 +48,11 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send DATA command and print server response.
     # Fill in start
+    # REF: https://www.samlogic.net/articles/smtp-commands-reference.htm
+    data_cmd = 'DATA\r\n'
+    clientSocket.send(data_cmd.encode())
+    server_response = clientSocket.recv(1024).decode()
+    print(server_response)
     # Fill in end
 
     # Send message data.
