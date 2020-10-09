@@ -9,7 +9,6 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # mailserver = 'smtp.google.com'
 
     # Create socket called clientSocket and establish a TCP connection with mailserver and port
-
     # Fill in start
     clientSocket = socket(AF_INET, SOCK_STREAM)
     clientSocket.bind((mailserver, port))
@@ -33,10 +32,18 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     email_to_be_from = 'charlesworrell@gmail.com'
     mail_from = 'MAIL FROM:<{}?\r\n'.format(email_to_be_from)
     clientSocket.send(mail_from.encode())
+    server_response = clientSocket.recv(1024)
+    server_response = server_response.decode()
+    print(server_response)
     # Fill in end
 
     # Send RCPT TO command and print server response.
     # Fill in start
+    email_to_send_to = 'cw2879@nyu.edu'
+    rcp_to = 'RCPT TO:<{}>\r\n'.format(email_to_send_to)
+    clientSocket.send(rcp_to.encode())
+    server_response = clientSocket.recv(1024).decode()
+    print(server_response)
     # Fill in end
 
     # Send DATA command and print server response.
